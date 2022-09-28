@@ -47,9 +47,9 @@
                 <form merthod='GET' action='update.php?id=2' id='formAccueil2' name='formAccueil2' class='formAccueil'>
                     <li class='cellList refs'><div>Description</div><div>Priority</div><div>Date_reminder</div><div>Thème</div></li>
 
-                    {{--@foreach($tasks as $task)
+                    @foreach($tasks as $task)
                         <li>Task => {{ $task->description }}</li>
-                    @endforeach --}}
+                    @endforeach
 
 
 
