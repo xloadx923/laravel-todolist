@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -12,16 +14,16 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected array $nav = [];
 
     public function index()
     {
-        $this->nav = [1=>"Accueil", 2=>"Créer une tâche", 3=>"Liste", 4=>"Historique", 5=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
+        $nav = [1=>"Accueil", 2=>"Créer une tâche", 3=>"Liste", 4=>"Historique", 5=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
 
         $content = [
             'title' => 'Gestion des tâches',
-            'maintitle' => isset($_REQUEST['dir']) ?  $this->nav[$_REQUEST['dir']] : $this->nav[0],
-            'nav' => $this->nav
+            'maintitle' => isset($_REQUEST['dir']) ?  $nav[$_REQUEST['dir']] : $nav[0],
+            'nav' => $nav,
+            'tasks' =>  Task::all()
         ];
         return view('index', $content);
     }

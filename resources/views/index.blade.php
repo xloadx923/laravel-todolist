@@ -51,8 +51,6 @@
                         <li>Task => {{ $task->description }}</li>
                     @endforeach
 
-
-
                 </form>
             </ul>
         </main>
