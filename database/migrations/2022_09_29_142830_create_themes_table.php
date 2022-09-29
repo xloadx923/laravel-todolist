@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('themes', function (Blueprint $table) {
             $table->increments('id_theme');
-            $table->string('theme_name',255);
-            $table->timestamps();
+            $table->string('theme_name');
         });
     }
 

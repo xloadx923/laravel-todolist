@@ -22,7 +22,7 @@
                 <li class="li-navbar">
 
                     @foreach($nav as $index=>$menu)
-                        <li  class="li-navbar"><a class="lnk-navbar" href="/index/?page=1&dir={{ $index }}">{{ $menu }}</a></li>
+                        <li class="li-navbar"><a class="lnk-navbar" href="{{ $index }}">{{ $menu }}</a></li>
                     @endforeach
 
                 </li>
@@ -44,14 +44,30 @@
             @endif
 
             <ul class='listTasks'>
-                <form merthod='GET' action='update.php?id=2' id='formAccueil2' name='formAccueil2' class='formAccueil'>
-                    <li class='cellList refs'><div>Description</div><div>Priority</div><div>Date_reminder</div><div>Thème</div></li>
-
-                    @foreach($tasks as $task)
-                        <li>Task => {{ $task->description }}</li>
-                    @endforeach
-
-                </form>
+                <li class='cellList refs'><div>Description</div><div>Priority</div><div>Date_reminder</div><div>Thème</div></li>
+                @foreach($tasks as $task)
+                    <form merthod='GET' action='update.php?id={{ $task->id_task }}' id='formAccueil{{ $task->id_task }}' name='formAccueil{{ $task->id_task }}' class='formAccueil'>
+                        <li class='cellList' style='background-color: {{ $task->color }};'>
+                            <div class='description'>
+                                <input type='text' value='{{ $task->description }}' id='id-description' name='id-description' ></div>
+                                <div class='priority'>
+                                    <span>Priorité</span>
+                                    <select id="select-priority" name="select-priority">
+                                        @for($i=1;$i<=5;$i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>';
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class='date'>{{ $task->date_reminder }}</div>
+                                @foreach($contains as $contain)
+                                    @if($contain->id_task === $task->id_task)
+                                        <div class='theme'><label for='theme{{ $task->id_task }}'></label><input type='checkbox' id='theme{{ $contain->id_theme }}' name='theme{{ $contain->id_theme }}' value='4' checked disabled><br></div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </li>
+                    </form>
+                @endforeach
             </ul>
         </main>
         <footer class="footer">&copy; 2022 - Yann / Wildo</footer>
