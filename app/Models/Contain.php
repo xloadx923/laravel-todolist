@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Contain extends Model
 {
     use HasFactory;
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class);
+    }
+    public function themes()
+    {
+        return $this->belongsToMany(Task::class);
+    }
 }

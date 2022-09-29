@@ -16,4 +16,6 @@ use App\Http\Controllers\TaskController;
 */
 
 Route::get('/index', [TaskController::class, 'index']);
-// Route::get('/create', [TaskController::class, 'create']);
+Route::get('index/create', [TaskController::class, 'create']);
+// Route::get('/tasks-create.html', [TaskController::class, 'create']);
+// Route::get('/tasks/edit/{id}', [TaskController::class, 'edit']);

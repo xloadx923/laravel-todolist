@@ -90,6 +90,10 @@
     .footer{ grid-area: 4 / 2; }
 
     .theme{ white-space: pre-line; }
+
+    .listTasks{
+
+    }
     .infosSelectMultiple{
         width: 12vw;
         height: auto;

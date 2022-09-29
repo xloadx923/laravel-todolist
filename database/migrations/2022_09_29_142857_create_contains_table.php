@@ -14,9 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('contains', function (Blueprint $table) {
-            $table->foreignId('id_task');
-            $table->foreignId('id_theme');
-            $table->timestamps();
+            $table->foreignIdFor(Task::class);
+            $table->foreignIdFor(Theme::class);
         });
     }
 

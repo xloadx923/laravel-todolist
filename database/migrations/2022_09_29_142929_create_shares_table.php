@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('shares', function (Blueprint $table) {
-            $table->foreignId("id_users");
-            $table->foreignId('id_task');
+            $table->id();
+            $table->foreignIdFor(Task::class);
         });
     }
 

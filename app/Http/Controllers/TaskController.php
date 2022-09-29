@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Contain;
+use App\Models\Theme;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -17,13 +18,17 @@ class TaskController extends Controller
 
     public function index()
     {
-        $nav = [1=>"Accueil", 2=>"Créer une tâche", 3=>"Liste", 4=>"Historique", 5=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
+        $nav = ["index"=>"Accueil", "index/create"=>"Créer une tâche", "index/list"=>"Liste", "index/history"=>"Historique", "index/connexion"=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
+
+        $join  = Task::join("contains", "id_task", "=", "contains.id_task")->get();
 
         $content = [
             'title' => 'Gestion des tâches',
-            'maintitle' => isset($_REQUEST['dir']) ?  $nav[$_REQUEST['dir']] : $nav[0],
+            'maintitle' => 'Accueil',
             'nav' => $nav,
-            'tasks' =>  Task::all()
+            'tasks' =>  $join,
+            'contains' => Contain::all(),
+            'themes' =>  Theme::all()
         ];
         return view('index', $content);
     }
