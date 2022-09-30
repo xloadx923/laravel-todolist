@@ -25,7 +25,7 @@ class TaskController extends Controller
         
         $content = [            
             'page' => 1,
-            'title' => 'Gestion des tâches',
+            'title' => 'Gestion des tâches - MASTER',
             'maintitle' => 'Accueil',
             'nav' => self::getNav(),
             'tasks' =>  Task::where('done', 0)->get(),
