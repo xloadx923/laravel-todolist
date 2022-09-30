@@ -21,18 +21,7 @@ class TaskController extends Controller
     }
 
     public function index()
-<<<<<<< HEAD
-    {
-        $nav = ["index"=>"Accueil", "index/create"=>"Créer une tâche", "index/list"=>"Liste", "index/history"=>"Historique", "index/connexion"=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
-
-
-        $content = [
-            'title' => 'Gestion des tâches',
-            'maintitle' => 'Accueil',
-            'nav' => $nav,
-            'tasks' =>  Task::where('done', 0),
-=======
-    {      
+    {   
         
         $content = [            
             'page' => 1,
@@ -40,7 +29,6 @@ class TaskController extends Controller
             'maintitle' => 'Accueil',
             'nav' => self::getNav(),
             'tasks' =>  Task::where('done', 0)->get(),
->>>>>>> c032df60d38480138c0320c935045594034e4ce1
             'contains' => Contain::all(),
             'themes' =>  Theme::all()
         ];
