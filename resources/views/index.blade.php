@@ -9,12 +9,12 @@
         @vite('resources/css/global.css')
         @vite('resources/css/style.css')
         @vite('resources/css/media.css')
-        <link rel="icon" type="image/png" href="favicon.png">
+        <link rel="icon" type="image/png" href="{{{ asset('favicon.png') }}}">
 </head>
 <body class="site">
     <div class="message"></div>
     <header class="header">
-        <img src="img/logo.png" class="logo">
+        <img src="{{{ asset('img/logo.png') }}}" class="logo" alt="Gestion des tâches">
         <h1 class="site_title">{{ $title }}</h1>
         </header>
         <nav class="navbar">
@@ -32,16 +32,18 @@
         <main class="main">
             <div class="title">{{ $maintitle }}</div>
 
-            @if(isset($_REQUEST['dir']) && $_REQUEST['dir'] == 1)
-                <div class='sort_list'>
-                    <select id='sort-priority' name='sort-priority'>
-                        <option selected readonly>Tri par priorité</option>
-                        <option readonly></option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select> <select id='sort-theme' name='sort-theme'>
-                        <option selected readonly>Tri par thème</option>
-                        <option readonly></option><option value='1'>Travail</option><option value='2'>Projet Web</option><option value='3'>Maison</option><option value='4'>Recherche de stage</option><option value='5'>Sport</option><option value='6'>Divertissement</option><option value='7'>Vacances</option><option value='8'>Apprentissage</option>
-                    </select>
-                </div>
-            @endif
+            @isset($page)
+                @if($page === 1)
+                    <div class='sort_list'>
+                        <select id='sort-priority' name='sort-priority'>
+                            <option selected readonly>Tri par priorité</option>
+                            <option readonly></option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select> <select id='sort-theme' name='sort-theme'>
+                            <option selected readonly>Tri par thème</option>
+                            <option readonly></option><option value='1'>Travail</option><option value='2'>Projet Web</option><option value='3'>Maison</option><option value='4'>Recherche de stage</option><option value='5'>Sport</option><option value='6'>Divertissement</option><option value='7'>Vacances</option><option value='8'>Apprentissage</option>
+                        </select>
+                    </div>
+                @endif
+            @endisset
 
             <ul class='listTasks'>
                 <li class='cellList refs'><div>Description</div><div>Priority</div><div>Date_reminder</div><div>Thème</div></li>
@@ -59,11 +61,17 @@
                                     </select>
                                 </div>
                                 <div class='date'>{{ $task->date_reminder }}</div>
+                                <div class='theme'>
                                 @foreach($contains as $contain)
-                                    @if($contain->id_task === $task->id_task)
-                                        <div class='theme'><label for='theme{{ $task->id_task }}'></label><input type='checkbox' id='theme{{ $contain->id_theme }}' name='theme{{ $contain->id_theme }}' value='4' checked disabled><br></div>
+                                    @if($task->task_id === $contain->task_id)
+                                        @foreach($themes as $theme)
+                                            @if($contain->theme_id === $theme->theme_id)
+                                            <label for='theme{{ $task->task_id }}'>{{ $theme->theme_name }}</label><input type='checkbox' id='theme{{ $contain->theme_id }}' name='theme{{ $contain->theme_id }}' value='{{ $contain->theme_id }}' checked disabled><br>
+                                            @endif
+                                        @endforeach        
                                     @endif
                                 @endforeach
+                                </div>
                             </div>
                         </li>
                     </form>

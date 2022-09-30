@@ -16,7 +16,11 @@ class Share extends Model
     public function tasks()
     {
         return $this->belongsToMany(Task::class);
+<<<<<<< HEAD
     }    
+=======
+    } 
+>>>>>>> c032df60d38480138c0320c935045594034e4ce1
     /**
     * Get 
     */
