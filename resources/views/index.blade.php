@@ -37,9 +37,17 @@
                     <div class='sort_list'>
                         <select id='sort-priority' name='sort-priority'>
                             <option selected readonly>Tri par priorité</option>
-                            <option readonly></option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select> <select id='sort-theme' name='sort-theme'>
+                            <option readonly></option>
+                            @for($i=1;$i<=5;$i++)
+                                <option value='{{ $i }}'>{{ $i }}</option>
+                            @endfor
+                        </select>
+                        <select id='sort-theme' name='sort-theme'>
                             <option selected readonly>Tri par thème</option>
-                            <option readonly></option><option value='1'>Travail</option><option value='2'>Projet Web</option><option value='3'>Maison</option><option value='4'>Recherche de stage</option><option value='5'>Sport</option><option value='6'>Divertissement</option><option value='7'>Vacances</option><option value='8'>Apprentissage</option>
+                            <option readonly></option>
+                            @foreach($themes as $theme)
+                                <option value='{{ $theme->theme_id }}'>{{ $theme->theme_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 @endif
