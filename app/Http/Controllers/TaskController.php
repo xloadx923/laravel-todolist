@@ -16,17 +16,19 @@ class TaskController extends Controller
      */
 
 
+    public function getNav():array{
+        return ["/index"=>"Accueil", "/create"=>"Créer une tâche", "/index/list"=>"Liste", "/index/history"=>"Historique", "/connexion"=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
+    }
+
     public function index()
-    {
-        $nav = ["index"=>"Accueil", "index/create"=>"Créer une tâche", "index/list"=>"Liste", "index/history"=>"Historique", "index/connexion"=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
-
-        $join  = Task::join("contains", "id_task", "=", "contains.id_task")->get();
-
-        $content = [
+    {      
+        
+        $content = [            
+            'page' => 1,
             'title' => 'Gestion des tâches',
             'maintitle' => 'Accueil',
-            'nav' => $nav,
-            'tasks' =>  $join,
+            'nav' => self::getNav(),
+            'tasks' =>  Task::where('done', 0)->get(),
             'contains' => Contain::all(),
             'themes' =>  Theme::all()
         ];
@@ -38,14 +40,49 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         $content = [
             'title' => 'Gestion des tâches',
             'maintitle' => 'Création d\'une tâche',
-            'nav' => $this->nav
+            'nav' => self::getNav()
         ];
         return view('create', $content);
+    }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {   
+        $content = [
+            'title' => 'Gestion des tâches',
+            'maintitle' => 'Liste des tâches',
+            'nav' => self::getNav(),
+            'tasks' =>  Task::all(),
+            'contains' => Contain::all(),
+            'themes' =>  Theme::all()
+        ];
+        return view('index', $content);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function history()
+    {   
+        $content = [
+            'title' => 'Gestion des tâches',
+            'maintitle' => 'Liste des tâches',
+            'nav' => self::getNav(),
+            'tasks' =>  Task::where('done', 0)->get(),
+            'contains' => Contain::all(),
+            'themes' =>  Theme::all()
+        ];
+        return view('index', $content);
     }
 
     /**
@@ -70,6 +107,24 @@ class TaskController extends Controller
         //
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function connexion()
+    {
+        $content = [
+            'title' => 'Gestion des tâches',
+            'maintitle' => 'Page de connexion',
+            'nav' => self::getNav(),
+            'tasks' =>  Task::all(),
+            'contains' => Contain::all(),
+            'themes' =>  Theme::all()
+        ];
+        return view('connexion', $content);
+    }
     /**
      * Show the form for editing the specified resource.
      *

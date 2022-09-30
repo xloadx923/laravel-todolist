@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('themes', function (Blueprint $table) {
-            $table->increments('id_theme');
+            $table->increments('theme_id');
             $table->string('theme_name');
         });
     }
