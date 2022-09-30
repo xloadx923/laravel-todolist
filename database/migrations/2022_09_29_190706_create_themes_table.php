@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contains', function (Blueprint $table) {
-            $table->foreignIdFor(Task::class);
-            $table->foreignIdFor(Theme::class);
+        Schema::create('themes', function (Blueprint $table) {
+            $table->increments('theme_id');
+            $table->string('theme_name');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contains');
+        Schema::dropIfExists('themes');
     }
 };

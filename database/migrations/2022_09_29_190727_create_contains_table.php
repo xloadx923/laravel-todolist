@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Theme;
+use App\Models\Task;
 
 return new class extends Migration
 {
@@ -13,9 +15,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('themes', function (Blueprint $table) {
-            $table->increments('id_theme');
-            $table->string('theme_name');
+        Schema::create('contains', function (Blueprint $table) {
+            $table->foreignIdFor(Task::class);
+            $table->foreignIdFor(Theme::class);
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('themes');
+        Schema::dropIfExists('contains');
     }
 };

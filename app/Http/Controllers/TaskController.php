@@ -20,13 +20,12 @@ class TaskController extends Controller
     {
         $nav = ["index"=>"Accueil", "index/create"=>"Créer une tâche", "index/list"=>"Liste", "index/history"=>"Historique", "index/connexion"=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
 
-        $join  = Task::join("contains", "id_task", "=", "contains.id_task")->get();
 
         $content = [
             'title' => 'Gestion des tâches',
             'maintitle' => 'Accueil',
             'nav' => $nav,
-            'tasks' =>  $join,
+            'tasks' =>  Task::where('done', 0),
             'contains' => Contain::all(),
             'themes' =>  Theme::all()
         ];

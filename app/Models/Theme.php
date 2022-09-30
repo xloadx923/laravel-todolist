@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Theme extends Model
 {
     use HasFactory;
-
-    public function tasks()
+    /**
+    * Get .
+    */
+    public function contains()
     {
-        return $this->belongsToMany(Task::class);
-    }
+        return $this->belongsToMany(Contain::class);
+    } 
 }

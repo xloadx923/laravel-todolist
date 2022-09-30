@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -14,13 +15,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->string('description', 50);
-            $table->string('color', 7);
-            $table->tinyInteger('priority');
+            $table->increments('task_id');
+            $table->string('description');
+            $table->string('color');
+            $table->integer('priority');
             $table->date('date_reminder');
             $table->boolean('done');
-            $table->foreignId('id_users');
+            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
     }
