@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\Contain;
 use App\Models\Theme;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 
 class TaskController extends Controller
 {
@@ -16,13 +17,12 @@ class TaskController extends Controller
      */
 
 
-    public function getNav():array{
+    public static function getNav():array{
         return ["/index"=>"Accueil", "/create"=>"Créer une tâche", "/index/list"=>"Liste", "/index/history"=>"Historique", "/connexion"=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
     }
 
     public function index()
-    {      
-        
+    {                    
         $content = [            
             'page' => 1,
             'title' => 'Gestion des tâches',
@@ -78,7 +78,7 @@ class TaskController extends Controller
             'title' => 'Gestion des tâches',
             'maintitle' => 'Liste des tâches',
             'nav' => self::getNav(),
-            'tasks' =>  Task::where('done', 0)->get(),
+            'tasks' =>  Task::where('done', 1)->get(),
             'contains' => Contain::all(),
             'themes' =>  Theme::all()
         ];
@@ -93,7 +93,9 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validated();
+        $validated = $request->safe()->only(['logUser', 'passUser']);
+        $validated = $request->safe()->except(['logUser', 'passUser']);
     }
 
     /**
@@ -107,24 +109,6 @@ class TaskController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function connexion()
-    {
-        $content = [
-            'title' => 'Gestion des tâches',
-            'maintitle' => 'Page de connexion',
-            'nav' => self::getNav(),
-            'tasks' =>  Task::all(),
-            'contains' => Contain::all(),
-            'themes' =>  Theme::all()
-        ];
-        return view('connexion', $content);
-    }
     /**
      * Show the form for editing the specified resource.
      *

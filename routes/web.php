@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ConnexionController;
+use Illuminate\Http\Request;
 
 
 /*
@@ -15,10 +17,18 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::get('index', [TaskController::class, 'index']);
-Route::get('create', [TaskController::class, 'create']);
-Route::get('index/list', [TaskController::class, 'list']);
+Route::get('/token', function (Request $request) {
+    $token = $request->session()->token();
+ 
+    $token = csrf_token();
+ 
+    // ...
+});
+Route::get('index',         [TaskController::class, 'index']);
+Route::get('create',        [TaskController::class, 'create']);
+Route::get('index/list',    [TaskController::class, 'list']);
 Route::get('index/history', [TaskController::class, 'history']);
-Route::get('connexion', [TaskController::class, 'connexion']);
-// Route::get('/tasks-create.html', [TaskController::class, 'create']);
-// Route::get('/tasks/edit/{id}', [TaskController::class, 'edit']);
+Route::get('inscription',   [InscriptionController::class, 'inscription']);
+Route::post('inscription',  [InscriptionController::class, 'postInscription']);
+Route::get('connexion',     [ConnexionController::class, 'formulaire']);
+Route::post('connexion',    [ConnexionController::class, 'traitement']);
