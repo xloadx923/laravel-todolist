@@ -1,4 +1,4 @@
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 820px) {
     .site{
         grid-template-columns: 5% 1fr 5%;
         grid-template-rows: 8% 5% 82% 5%;
@@ -91,14 +91,69 @@
 
     .theme{ white-space: pre-line; }
 
-    .listTasks{
-
+    .description input[type=text]{
+        margin-top: 0;
+        height: 70%;
     }
     .infosSelectMultiple{
         width: 12vw;
         height: auto;
     }
     .formCreate{ grid-template-columns: 1fr 15% 30% 1fr; }
+
+    
+    #formConnexion, #formInscription {
+        margin-top: 2rem;
+        padding: 2rem;
+        display: grid;
+        align-items: center;
+        justify-content: space-between;
+        grid-template-columns: 1fr 25rem 25rem 1fr;
+        gap: 3rem;
+    }
+    #formConnexion #email{
+        grid-area: 2/2;
+        width: 25rem;
+        text-align: center;
+    }
+    #formConnexion #password{
+        grid-area: 2/3;
+        width: 25rem;
+        text-align: center;
+    }
+    #formConnexion #btnConnexion, #formConnexion #lnkInscription{
+        grid-area: 3/3;
+        width: 10rem;
+        height: 2rem;
+        align-self: flex-end;
+        justify-self: end;
+    }
+    #formConnexion #lnkInscription{
+        justify-self: flex-start;
+        text-align: center;
+        border-radius: 4px;
+        height: 25px;
+        line-height: 25px;
+        font-size: 1.3rem;
+        color: black;
+        background-color: #e9e9ed;
+        border: solid #8f8f9d 1px;
+    }
+    #formInscription #name{ grid-area: 2/2; }
+    #formInscription #name + p{ grid-area: 2/3 }
+    #formInscription #email{ grid-area: 3/2; }
+    #formInscription #email + p{ grid-area: 3/3; }
+    #formInscription #password{ grid-area: 4/2; }
+    #formInscription #password + p{ grid-area: 4/3; }
+    #formInscription #password_confirmation{ grid-area: 5/2; }
+    #formInscription #password_confirmation + p{ grid-area: 5/3; }
+    #formInscription #btnInscription{
+        grid-area: 6/2;
+        width: 10rem;
+    }
+    .pageInscription{
+        height: 45vh;
+    }
 
     /* footer, main, .navbar, .header{display:none;} */
     .xdebug-var-dump{ top: 0;position: absolute;z-index: 1000;background: white;padding: 1rem;border: solid blue .5rem; }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\TaskController;
+use App\Models\UserLog;
 
 class ConnexionController extends Controller
 {
@@ -29,14 +30,16 @@ class ConnexionController extends Controller
             'password' => 'required'
         ]);
 
-        $result = auth()->attempt([
-            'email' => request('email'),
-            'password' => request('password')          
-        ]);
+        $result = UserLog::where(["email", "=", $request->email],["password", "=", $request->password]);
 
-        var_dump($result);
+        dd($result->toSql());
 
-        return 'Traitement formulaire connexion';
+        if($result->exists){
+            session(['login' => true]);
+        }
+
+        if($request->session()->get('login')) return 'La connexion est activée';
+        else return 'La connexion a échoué...';
     }
 
 }

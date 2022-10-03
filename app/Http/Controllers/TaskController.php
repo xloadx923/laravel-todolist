@@ -18,7 +18,7 @@ class TaskController extends Controller
 
 
     public static function getNav():array{
-        return ["/index"=>"Accueil", "/create"=>"Créer une tâche", "/index/list"=>"Liste", "/index/history"=>"Historique", "/connexion"=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
+        return ["/"=>"Accueil", "/create"=>"Créer une tâche", "/index/list"=>"Liste", "/index/history"=>"Historique", "/connexion"=>(isset($_SESSION['login']) ? "Déconnexion" : "Connexion")];
     }
 
     public function index()

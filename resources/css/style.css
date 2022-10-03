@@ -229,8 +229,9 @@ body{
     align-items: center;
 }
 .description input[type=text]{
+    margin-top: 1rem;
     width: 80%;
-    height: 50%;
+    height: 100%;
 }
 .btn-description{
     height: 70%;
@@ -253,7 +254,7 @@ body{
 }
 .priority span, .div-checkbox span{ padding-right: 1rem; }
 
-.divFormCreate, .pageConnexion, .divErrorConnect{
+.divFormCreate, .pageConnexion, .pageInscription, .divErrorConnect{
     background-color: #e6f2b6;
 }
 .divErrorConnect{
@@ -321,34 +322,44 @@ body{
 .pageConnexion, .divErrorConnect{
     height: 20vh;
 }
-#formConnexion {
+.pageInscription{
+    height: 30vh;
+}
+#formConnexion, #formInscription{
     margin-top: 2rem;
     padding: 2rem;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    grid-template-columns: 1fr 25rem 25rem 1fr;
-    gap: 3rem;
+    gap: 1rem;
 }
-#formConnexion #email{
-    grid-area: 2/2;
+#formConnexion #email, #formConnexion #password, #formInscription *{
     width: 25rem;
     text-align: center;
 }
-#formConnexion #password{
-    grid-area: 2/3;
-    width: 25rem;
+#formConnexion #lnkInscription{
     text-align: center;
+    border-radius: 4px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 1.3rem;
+    color: black;
+    background-color: #e9e9ed;
+    border: solid #8f8f9d 1px;
 }
-#formConnexion #btnConnexion, #formConnexion #btnInscription{
-    grid-area: 3/3;
+#formConnexion #btnConnexion, #formConnexion #lnkInscription{
     width: 10rem;
     height: 2rem;
-    align-self: flex-end;
-    justify-self: end;
 }
-#formConnexion #btnInscription{
-    justify-self: flex-start;
+#formConnexion #btnConnexion{
+    align-self: end;
+}
+#formConnexion #lnkInscription{    
+    align-self: start;
+}
+#formInscription #btnInscription{
+    width: 10rem;
 }
 /***********/
 /** MODAL **/
@@ -411,3 +422,4 @@ a:hover{ text-decoration: none;color: red; }
 
 .xdebug-error.xe-warning{ position: absolute; z-index: 10000; background: yellow;border: solid red 2px;padding: 1rem;margin: 150px 0 0 0;font-size: 1.5rem; }
 .xdebug-error.xe-uncaught-exception{ position: absolute; z-index: 10020; background: yellow;border: solid red 2px;padding: 1rem;margin: 50px 0 0 0;font-size: 1.5rem; }
+.is-danger{ background-color: white;color: blue;padding: 1rem 1.5rem;border: solid red 1px; }

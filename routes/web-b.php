@@ -6,6 +6,7 @@ use App\Http\Controllers\ConnexionController;
 use App\Http\Controllers\InscriptionController;
 use Illuminate\Http\Request;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,7 @@ Route::get('/token', function (Request $request) {
     $token = $request->session()->token(); 
     $token = csrf_token();
 });
-Route::get('/',         [TaskController::class, 'index']);
+Route::get('index',         [TaskController::class, 'index']);
 Route::get('create',        [TaskController::class, 'create']);
 Route::get('index/list',    [TaskController::class, 'list']);
 Route::get('index/history', [TaskController::class, 'history']);
@@ -32,9 +33,4 @@ Route::post('inscription',  [InscriptionController::class, 'postInscription']);
 Route::get('connexion',     [ConnexionController::class, 'formulaire']);
 Route::post('connexion',    [ConnexionController::class, 'traitement']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-require __DIR__.'/auth.php';
 ?>
